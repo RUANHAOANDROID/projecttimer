@@ -1,0 +1,12 @@
+app:
+  version: 1
+  appname: project timer
+
+database:
+    name: pt.db
+    type: sqlite3
+    user: admin
+    pwd: projecttimer
+server:
+  host: 127.0.0.1
+  port: "8888"
