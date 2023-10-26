@@ -1,5 +1,7 @@
 package db
 
+import "projecttimer/utils"
+
 type Customer struct {
 	ID      uint   `json:"id"gorm:"primaryKey"`
 	Name    string `json:"name"`
@@ -22,4 +24,17 @@ func (c Customer) List(cs *[]Customer) error {
 
 func (c Customer) Delete(id string) error {
 	return DB.Delete(&c, "id=?", id).Error
+}
+func (c Customer) ListPage(
+	count *int64, customers *[]Customer,
+	offset int, limit int,
+) error {
+	customerTab := DB.Model(&Customer{})
+	err := customerTab.Count(count).Error
+	if err != nil {
+		utils.Log.Error(err.Error())
+	}
+	//err = eventTab.Where("id BETWEEN ? AND ?", offset, limit).Find(&events).Error
+	err = customerTab.Order("id DESC").Offset(offset).Limit(limit).Find(&customers).Error //查询pageindex页的数据
+	return err
 }
