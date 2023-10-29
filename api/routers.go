@@ -95,6 +95,7 @@ func handlerGroup(r *gin.RouterGroup) {
 	r.GET("/deleteCustomer", func(c *gin.Context) {
 		_id := c.Query("id")
 		db.Customer{}.Delete(_id)
+		c.JSON(http.StatusOK, RespSuccess(nil))
 	})
 }
 

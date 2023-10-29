@@ -1,9 +1,12 @@
 package main
 
 import (
+	"fmt"
+	"os"
 	"projecttimer/api"
 	"projecttimer/config"
 	"projecttimer/db"
+	"projecttimer/desktop"
 )
 
 func main() {
@@ -12,5 +15,11 @@ func main() {
 		panic("config.yml read error")
 	}
 	db.Create(conf)
-	api.Start(conf)
+	go api.Start(conf)
+	currentDir, err := os.Getwd()
+	if err != nil {
+		panic(fmt.Errorf("failed to get current directory: %v", err))
+	}
+	//运行交互层
+	desktop.LauncherFWApp(currentDir)
 }
