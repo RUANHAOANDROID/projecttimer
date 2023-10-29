@@ -1,13 +1,11 @@
 package api
 
 import (
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"projecttimer/db"
 	"projecttimer/frontend"
 	"projecttimer/utils"
-	"strconv"
 )
 
 func Cors() gin.HandlerFunc {
@@ -60,23 +58,16 @@ func ErrorHandler() gin.HandlerFunc {
 }
 
 func handlerGroup(r *gin.RouterGroup) {
-	r.GET("/customers", func(c *gin.Context) {
-		offset := c.Query("offset")
-		limit := c.Query("limit")
-		var count int64
-		offsetInt, err := strconv.Atoi(offset)
-		if err != nil {
-			fmt.Println("转换失败:", err)
-			return
-		}
-		limitInt, err := strconv.Atoi(limit)
-		if err != nil {
-			fmt.Println("转换失败:", err)
-			return
-		}
+	r.POST("/customers", func(c *gin.Context) {
+		pageRequest := PageRequest{}
+		c.BindJSON(&pageRequest)
+
+		offset := pageRequest.Offset
+		limit := pageRequest.Limit
 		customer := db.Customer{}
 		var cs []db.Customer
-		err = customer.ListPage(&count, &cs, offsetInt, limitInt)
+		var count int64
+		err := customer.ListPage(&count, &cs, offset, limit)
 		if err != nil {
 			utils.Log.Error(err)
 			c.JSON(http.StatusOK, RespError(err.Error()))
