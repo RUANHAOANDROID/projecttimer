@@ -3,12 +3,17 @@ package db
 import "projecttimer/utils"
 
 type Customer struct {
-	ID      uint   `json:"id"gorm:"primaryKey"`
-	Name    string `json:"name"`
-	Phone   string `json:"phone"`
-	Address string `json:"address"`
-	UseTime int64  `json:"use_time"`
-	EndTime int64  `json:"end_time"`
+	ID        uint   `json:"id"gorm:"primaryKey"`
+	Name      string `json:"name"`
+	Phone     string `json:"phone"`
+	Address   string `json:"address"`
+	UseTime   int64  `json:"use_time"`
+	EndTime   int64  `json:"end_time"`
+	Purchased byte   `json:"purchased"` //1已购买 0 WEIGOUMAI
+	Version   string `json:"version"`
+	Brand     string `json:"brand"` //品牌
+	Remark1   string `json:"remark_1"`
+	Remark2   string `json:"remark_2"`
 }
 
 func (c Customer) Add() error {

@@ -7,6 +7,7 @@ import (
 	"projecttimer/config"
 	"projecttimer/db"
 	"projecttimer/desktop"
+	"strings"
 )
 
 func main() {
@@ -20,6 +21,13 @@ func main() {
 	if err != nil {
 		panic(fmt.Errorf("failed to get current directory: %v", err))
 	}
-	//运行交互层
-	desktop.LauncherFWApp(currentDir)
+	debug := os.Getenv("GODEBUG")
+	isDebug := strings.Contains(debug, "gctrace=1")
+	if !isDebug {
+		//运行交互层
+		desktop.LauncherFWApp(currentDir)
+	}
+	for {
+
+	}
 }

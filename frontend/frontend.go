@@ -11,5 +11,5 @@ import (
 var Static embed.FS
 
 func Register(gin *gin.Engine, webPath string) {
-	gin.StaticFS("/timer/", http.FS(Static))
+	gin.StaticFS("/pt/", http.FS(Static))
 }
