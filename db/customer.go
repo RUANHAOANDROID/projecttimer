@@ -21,7 +21,7 @@ func (c Customer) Add() error {
 }
 
 func (c Customer) Update() error {
-	return DB.Model(&c).Where("id=?", c.ID).Updates(c).Error
+	return DB.Model(&c).Updates(c).Error
 }
 func (c Customer) List(cs *[]Customer) error {
 	return DB.Order("end_time").Find(cs).Error
