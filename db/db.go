@@ -24,13 +24,13 @@ func Create(config *config.Config) {
 			fmt.Println(err.Error())
 		}
 		DB = db
-		createUserTab()
+		createUserTab(config.App.User, config.App.Pwd)
 		createCustomerTab()
 	}
 }
 
-func createUserTab() {
-	user := User{Number: "888888", Pwd: "666666"}
+func createUserTab(userName string, pwd string) {
+	user := User{Number: userName, Pwd: pwd}
 	if !DB.Migrator().HasTable(&user) {
 		DB.AutoMigrate(&user)
 		DB.Create(&user)

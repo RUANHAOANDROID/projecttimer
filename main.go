@@ -6,7 +6,6 @@ import (
 	"projecttimer/api"
 	"projecttimer/config"
 	"projecttimer/db"
-	"projecttimer/desktop"
 	"strings"
 )
 
@@ -23,10 +22,12 @@ func main() {
 	}
 	debug := os.Getenv("GODEBUG")
 	isDebug := strings.Contains(debug, "gctrace=1")
-	if !isDebug {
-		//运行交互层
-		desktop.LauncherFWApp(currentDir)
-	}
+	fmt.Println(currentDir)
+	fmt.Println(isDebug)
+	//if !isDebug {
+	//	//运行交互层
+	//	desktop.LauncherFWApp(currentDir)
+	//}
 	for {
 
 	}

@@ -11,11 +11,11 @@ import (
 // Config 系统整体配置
 type Config struct {
 	App struct {
-		AppName string `yaml:"appName,omitempty"`
-		Version string `yaml:"version"`
-		Port    uint   `yaml:"port"`
-		User    string `yaml:"user"`
-		Pwd     string `yaml:"pwd"`
+		AppName  string `yaml:"appName,omitempty"`
+		Version  string `yaml:"version"`
+		User     string `yaml:"user"`
+		Pwd      string `yaml:"pwd"`
+		Platform string `yaml:"platform"`
 	}
 	Database struct {
 		Type string `yaml:"type"`

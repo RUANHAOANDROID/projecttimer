@@ -1,12 +1,13 @@
 app:
   version: 1
   appname: project timer
+  platform: web
+  user: admin
+  pwd: 668899
 
 database:
-    name: pt.db
-    type: sqlite3
-    user: admin
-    pwd: projecttimer
+  name: pt.db
+  type: sqlite3
 server:
   host: 0.0.0.0
   port: "6688"
