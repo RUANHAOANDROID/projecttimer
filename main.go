@@ -7,15 +7,17 @@ import (
 	"projecttimer/config"
 	"projecttimer/db"
 	"strings"
+	"sync"
 )
 
 func main() {
+	var wg sync.WaitGroup
 	conf, err := config.Load("config.yml")
 	if err != nil {
 		panic("config.yml read error")
 	}
 	db.Create(conf)
-	go api.Start(conf)
+
 	currentDir, err := os.Getwd()
 	if err != nil {
 		panic(fmt.Errorf("failed to get current directory: %v", err))
@@ -28,7 +30,10 @@ func main() {
 	//	//运行交互层
 	//	desktop.LauncherFWApp(currentDir)
 	//}
-	for {
-
-	}
+	wg.Add(1)
+	go func() {
+		defer wg.Done()
+		api.Start(conf)
+	}()
+	wg.Wait()
 }
