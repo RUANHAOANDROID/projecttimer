@@ -8,7 +8,7 @@ import (
 	"projecttimer/utils"
 )
 
-// Config 系统整体配置
+// Config 系统整体配置--
 type Config struct {
 	App struct {
 		AppName  string `yaml:"appName,omitempty"`
