@@ -8,7 +8,7 @@ import (
 
 func LauncherFWApp(path string) {
 	// 指定 Flutter 打包的可执行程序路径
-	flutterAppPath := path + "/windows/runner/Release/projecttimerf"
+	flutterAppPath := path + "\\windows\\x64\\runner\\Release\\projecttimerf"
 
 	// 检查可执行程序文件是否存在
 	if _, err := os.Stat(flutterAppPath); os.IsNotExist(err) {

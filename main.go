@@ -6,6 +6,7 @@ import (
 	"projecttimer/api"
 	"projecttimer/config"
 	"projecttimer/db"
+	"projecttimer/desktop"
 	"strings"
 	"sync"
 )
@@ -26,14 +27,15 @@ func main() {
 	isDebug := strings.Contains(debug, "gctrace=1")
 	fmt.Println(currentDir)
 	fmt.Println(isDebug)
-	//if !isDebug {
-	//	//运行交互层
-	//	desktop.LauncherFWApp(currentDir)
-	//}
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		api.Start(conf)
 	}()
-	wg.Wait()
+	if !isDebug {
+		//运行交互层
+		desktop.LauncherFWApp(currentDir)
+	} else {
+		wg.Wait()
+	}
 }
