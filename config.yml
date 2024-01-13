@@ -6,6 +6,10 @@ app:
   pwd: 668899
   debug: true
 
+customize:
+  c1: 备用列1
+  c2: 备用列2
+
 database:
   name: pt.db
   type: sqlite3
