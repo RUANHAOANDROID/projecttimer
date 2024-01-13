@@ -16,6 +16,7 @@ type Config struct {
 		User     string `yaml:"user"`
 		Pwd      string `yaml:"pwd"`
 		Platform string `yaml:"platform"`
+		Debug    bool   `yaml:"debug"`
 	}
 	Database struct {
 		Type string `yaml:"type"`
