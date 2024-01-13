@@ -7,7 +7,6 @@ import (
 	"projecttimer/config"
 	"projecttimer/db"
 	"projecttimer/desktop"
-	"strings"
 	"sync"
 )
 
@@ -18,21 +17,17 @@ func main() {
 		panic("config.yml read error")
 	}
 	db.Create(conf)
-
 	currentDir, err := os.Getwd()
 	if err != nil {
 		panic(fmt.Errorf("failed to get current directory: %v", err))
 	}
-	debug := os.Getenv("GODEBUG")
-	isDebug := strings.Contains(debug, "gctrace=1")
 	fmt.Println(currentDir)
-	fmt.Println(isDebug)
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
 		api.Start(conf)
 	}()
-	if !isDebug {
+	if conf.App.Platform == "windows" {
 		//运行交互层
 		desktop.LauncherFWApp(currentDir)
 	} else {

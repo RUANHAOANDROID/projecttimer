@@ -4,6 +4,7 @@ app:
   platform: web
   user: admin
   pwd: 668899
+  debug: true
 
 database:
   name: pt.db
