@@ -1,5 +1,5 @@
 # 使用 golang:latest 作为基础镜像
-FROM golang:1.20
+FROM golang:1.20-alpine
 
 # 设置工作目录
 WORKDIR /app
@@ -20,6 +20,10 @@ ENV APP_NAME pt
 LABEL version="1.1"
 # 暴露应用程序的端口
 ENV APP_PORT 6688
-VOLUME ["/app/data"]
+#VOLUME ["/app/data"]
 # 运行应用程序
-CMD ["./main", "-name", "$APP_NAME", "-port", "$APP_PORT"]
+CMD ["./main"]
+#CMD ["./main", "-name", "$APP_NAME", "-port", "$APP_PORT"]
+# --network bridge
+# -p 6688:6688
+# -v /mnt/disk1/appdata/pt/:/

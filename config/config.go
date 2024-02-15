@@ -26,6 +26,10 @@ type Config struct {
 		Host string `yaml:"host"`
 		Port string `yaml:"port"`
 	}
+	Customize struct {
+		C1 string `json:"c1"` //定制列1 名称
+		C2 string `json:"c2"` //定制列2 名称
+	}
 }
 
 var path string
