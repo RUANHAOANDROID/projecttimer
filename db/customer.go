@@ -33,9 +33,6 @@ func (c Customer) Add() error {
 func (c Customer) Update() error {
 	return DB.Model(&c).Updates(c).Error
 }
-func (c Customer) List(cs *[]Customer) error {
-	return DB.Order("end_time").Find(cs).Error
-}
 
 func (c Customer) Delete(id string) error {
 	return DB.Delete(&c, "id=?", id).Error
@@ -44,12 +41,13 @@ func (c Customer) ListPage(
 	count *int64, customers *[]Customer,
 	offset int, limit int,
 ) error {
+	utils.Log.Debug(count, offset)
 	customerTab := DB.Model(&Customer{})
 	err := customerTab.Count(count).Error
 	if err != nil {
 		utils.Log.Error(err.Error())
 	}
 	//err = eventTab.Where("id BETWEEN ? AND ?", offset, limit).Find(&events).Error
-	err = customerTab.Order("id DESC").Offset(offset).Limit(limit).Find(&customers).Error //查询pageindex页的数据
+	err = customerTab.Order("id").Offset(offset).Limit(limit).Find(&customers).Error //查询pageindex页的数据
 	return err
 }
